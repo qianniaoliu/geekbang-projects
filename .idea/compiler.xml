@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="athena-web-mvc" />
+        <module name="athena-web" />
       </profile>
     </annotationProcessing>
   </component>

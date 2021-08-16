@@ -12,7 +12,15 @@ public class HandleMethod {
 
     private Method method;
 
+    private Object controller;
+
     private Set<String> supportMethodTypes;
+
+    public HandleMethod(String requestUrl, Method method, Object controller) {
+        this.requestUrl = requestUrl;
+        this.method = method;
+        this.controller = controller;
+    }
 
     public String getRequestUrl() {
         return requestUrl;
@@ -28,6 +36,14 @@ public class HandleMethod {
 
     public void setMethod(Method method) {
         this.method = method;
+    }
+
+    public Object getController() {
+        return controller;
+    }
+
+    public void setController(Object controller) {
+        this.controller = controller;
     }
 
     public Set<String> getSupportMethodTypes() {

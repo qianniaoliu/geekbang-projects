@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>athena-web-mvc</module>
+        <module>athena-web</module>
     </modules>
 
     <properties>
