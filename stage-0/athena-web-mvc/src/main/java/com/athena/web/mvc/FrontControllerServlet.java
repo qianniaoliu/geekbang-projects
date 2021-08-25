@@ -87,7 +87,21 @@ public class FrontControllerServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestURI();
+        String requestUri = req.getRequestURI();
+        HandleMethod handleMethod = handleMethodMapping.get(requestUri);
+        if(Objects.isNull(handleMethod)){
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        try{
+            Object result = handleMethod.getMethod().invoke(handleMethod.getController(), null);
+            req.getRequestDispatcher("/123").forward(req, resp);
+            resp.getWriter().write(result.toString());
+        }catch (Exception ex){
+
+        }
+
+
         System.out.println("in FrontControllerServlet");
     }
 }
