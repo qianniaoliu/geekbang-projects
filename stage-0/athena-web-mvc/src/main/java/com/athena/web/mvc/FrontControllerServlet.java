@@ -1,13 +1,16 @@
 package com.athena.web.mvc;
 
 import com.athena.web.mvc.controller.Controller;
+import com.athena.web.mvc.controller.PageController;
+import com.athena.web.mvc.controller.RestController;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.Path;
 import java.io.IOException;
@@ -29,9 +32,8 @@ public class FrontControllerServlet extends HttpServlet {
     private Map<String, HandleMethod> handleMethodMapping = new HashMap<>();
 
     @Override
-    public void init() throws ServletException {
-        System.out.println("FrontControllerServlet begin init");
-        initHandleMethods();
+    public void init(ServletConfig config) throws ServletException {
+        System.out.println("FrontControllerServlet init success");
     }
 
     private void initHandleMethods() {
@@ -86,17 +88,28 @@ public class FrontControllerServlet extends HttpServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String requestUri = req.getRequestURI();
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String requestUri = request.getRequestURI();
+        System.out.println(requestUri);
         HandleMethod handleMethod = handleMethodMapping.get(requestUri);
         if(Objects.isNull(handleMethod)){
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
+        String httpMethod = request.getMethod();
+        if(!handleMethod.getSupportMethodTypes().contains(httpMethod)){
+            response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        }
         try{
-            Object result = handleMethod.getMethod().invoke(handleMethod.getController(), null);
-            req.getRequestDispatcher("/123").forward(req, resp);
-            resp.getWriter().write(result.toString());
+            Object controller = handleMethod.getController();
+            if(controller instanceof PageController) {
+                PageController pageController = (PageController) controller;
+                String viewPath = pageController.execute(request, response);
+                ServletContext servletContext = request.getServletContext();
+                servletContext.getRequestDispatcher(viewPath).forward(request, response);
+            }else if(controller instanceof RestController){
+                Object result = handleMethod.getMethod().invoke(handleMethod.getController(), null);
+            }
         }catch (Exception ex){
 
         }

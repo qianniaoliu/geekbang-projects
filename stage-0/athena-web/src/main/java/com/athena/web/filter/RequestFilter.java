@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * @author shenlong
- * @version RequestFilter.java, v 0.1 2021年08月15日 8:40 下午 shenlong
+ * @version RequestFilter.java
  */
 public class RequestFilter implements Filter {
     @Override
