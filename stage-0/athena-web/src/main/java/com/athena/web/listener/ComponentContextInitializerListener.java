@@ -4,6 +4,7 @@
  */
 package com.athena.web.listener;
 
+import com.athena.context.ClassicComponentContext;
 import com.athena.web.mvc.FrontControllerServlet;
 
 import javax.servlet.ServletContext;
@@ -16,12 +17,19 @@ import javax.servlet.ServletRegistration;
  */
 public class ComponentContextInitializerListener implements ServletContextListener {
 
+    private ServletContext servletContext;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext servletContext = sce.getServletContext();
         ServletRegistration.Dynamic reg = servletContext.addServlet("frontControllerServlet", FrontControllerServlet.class);
         reg.addMapping("/*");
         System.out.println("Servlet Context initial success");
+
+
+        this.servletContext = servletContext;
+        ClassicComponentContext context = new ClassicComponentContext();
+        context.init(servletContext);
 
     }
 

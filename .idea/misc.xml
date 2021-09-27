@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/stage-0/athena-injection/pom.xml" />
       </list>
     </option>
   </component>

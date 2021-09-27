@@ -33,6 +33,7 @@ public class FrontControllerServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
+        initHandleMethods();
         System.out.println("FrontControllerServlet init success");
     }
 
