@@ -8,8 +8,8 @@
     <file url="file://$PROJECT_DIR$/stage-0/athena-injection/src/main/java/com/athena/injection/AbstractComponentRepository.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stage-0/athena-injection/src/main/java/com/athena/injection/ComponentRepository.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stage-0/athena-injection/src/main/java/com/athena/injection/JndiComponentRepository.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/stage-0/athena-web-mvc/src/main/java/com/athena/web/mvc/controller/PageController.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/stage-0/athena-web/src/main/java/com/athena/sql/DBConnectionManager.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/stage-0/athena-web-mvc/src/main/java/com/athena/web/mvc/controller/PageController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/stage-0/athena-web/src/main/java/com/athena/sql/DBConnectionManager.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/stage-0/athena-web/src/main/java/com/athena/validation/ValidationDemo.java" charset="UTF-8" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 package com.athena.web.mvc;
 
+import com.alibaba.fastjson.JSONObject;
 import com.athena.web.mvc.controller.Controller;
 import com.athena.web.mvc.controller.PageController;
 import com.athena.web.mvc.controller.RestController;
@@ -44,16 +45,16 @@ public class FrontControllerServlet extends HttpServlet {
             Path controllerPath = controllerClass.getAnnotation(Path.class);
             String controllerPathUrl = prettyPathUrl(controllerPath);
             Method[] methods = controllerClass.getMethods();
-            if(methods != null && methods.length > 0){
+            if (methods != null && methods.length > 0) {
                 Stream.of(methods).forEach(method -> {
                     Path methodPath = method.getAnnotation(Path.class);
-                    if(methodPath != null){
+                    if (methodPath != null) {
                         String methodPathUrl = prettyPathUrl(methodPath);
                         String fullPathUrl = controllerPathUrl + methodPathUrl;
                         HandleMethod handleMethod = new HandleMethod(fullPathUrl, method, controllerProvider.get());
                         Set<String> supportMethodTypes = getSupportMethodType(method);
                         handleMethod.setSupportMethodTypes(supportMethodTypes);
-
+                        System.out.println("init handle url : " + fullPathUrl);
                         handleMethodMapping.put(fullPathUrl, handleMethod);
                     }
                 });
@@ -65,24 +66,23 @@ public class FrontControllerServlet extends HttpServlet {
         Set<String> result = new HashSet<>();
         Stream.of(method.getAnnotations()).forEach(annotation -> {
             HttpMethod httpMethod = annotation.annotationType().getAnnotation(HttpMethod.class);
-            if(Objects.nonNull(httpMethod)){
+            if (Objects.nonNull(httpMethod)) {
                 result.add(httpMethod.value());
             }
         });
-        if(result.size() == 0){
-            result.addAll(Arrays.asList(HttpMethod.GET,HttpMethod.DELETE,HttpMethod.HEAD,
-                    HttpMethod.OPTIONS,HttpMethod.PATCH,HttpMethod.POST,HttpMethod.PUT));
+        if (result.size() == 0) {
+            result.addAll(Arrays.asList(HttpMethod.GET, HttpMethod.DELETE, HttpMethod.HEAD,
+                    HttpMethod.OPTIONS, HttpMethod.PATCH, HttpMethod.POST, HttpMethod.PUT));
         }
         return result;
     }
 
-
-    private String prettyPathUrl(Path path){
+    private String prettyPathUrl(Path path) {
         String pathUrl = "";
-        if(path != null && StringUtils.isNotBlank(path.value())){
+        if (path != null && StringUtils.isNotBlank(path.value())) {
             pathUrl = path.value();
         }
-        if(StringUtils.isNotBlank(pathUrl) && !pathUrl.startsWith("/")){
+        if (StringUtils.isNotBlank(pathUrl) && !pathUrl.startsWith("/")) {
             pathUrl = "/" + pathUrl;
         }
         return pathUrl;
@@ -90,32 +90,32 @@ public class FrontControllerServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestUri = request.getRequestURI();
+        String requestUri = request.getRequestURI().replace(request.getContextPath(), "");
         System.out.println(requestUri);
         HandleMethod handleMethod = handleMethodMapping.get(requestUri);
-        if(Objects.isNull(handleMethod)){
+        if (Objects.isNull(handleMethod)) {
+            System.out.println("not found target handleMethod");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         String httpMethod = request.getMethod();
-        if(!handleMethod.getSupportMethodTypes().contains(httpMethod)){
+        if (!handleMethod.getSupportMethodTypes().contains(httpMethod)) {
             response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
         }
-        try{
+        try {
             Object controller = handleMethod.getController();
-            if(controller instanceof PageController) {
+            if (controller instanceof PageController) {
                 PageController pageController = (PageController) controller;
                 String viewPath = pageController.execute(request, response);
                 ServletContext servletContext = request.getServletContext();
                 servletContext.getRequestDispatcher(viewPath).forward(request, response);
-            }else if(controller instanceof RestController){
-                Object result = handleMethod.getMethod().invoke(handleMethod.getController(), null);
+            } else if (controller instanceof RestController) {
+                Object result = handleMethod.getMethod().invoke(handleMethod.getController(), request, response);
+                String outMessage = JSONObject.toJSONString(result);
+                response.getWriter().write(outMessage);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
         }
-
-
-        System.out.println("in FrontControllerServlet");
     }
 }

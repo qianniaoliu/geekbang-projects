@@ -17,7 +17,6 @@ import java.util.Properties;
 
 /**
  * @author shenlong
- * @version jpaDemo.java, v 0.1 2021年08月31日 7:40 下午 shenlong
  */
 public class JpaDemo {
 

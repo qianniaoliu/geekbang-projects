@@ -23,10 +23,7 @@ public class ComponentContextInitializerListener implements ServletContextListen
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext servletContext = sce.getServletContext();
         ServletRegistration.Dynamic reg = servletContext.addServlet("frontControllerServlet", FrontControllerServlet.class);
-        reg.addMapping("/*");
-        System.out.println("Servlet Context initial success");
-
-
+        reg.addMapping("/");
         this.servletContext = servletContext;
         ClassicComponentContext context = new ClassicComponentContext();
         context.init(servletContext);

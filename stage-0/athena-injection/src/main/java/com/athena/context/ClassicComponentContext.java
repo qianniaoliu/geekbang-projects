@@ -276,6 +276,7 @@ public class ClassicComponentContext implements ComponentContext {
                     String fullName = name.startsWith("/") ?
                             element.getName() : name + "/" + element.getName();
                     fullNames.add(fullName);
+                    System.out.println("current context name:" + fullName);
                 }
             }
             return fullNames;
@@ -284,6 +285,7 @@ public class ClassicComponentContext implements ComponentContext {
 
     @Override
     public void init() {
+
         initClassLoader();
         initEnvContext();
         instantiateComponents();

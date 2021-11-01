@@ -13,7 +13,6 @@ import java.util.Date;
 
 /**
  * @author shenlong
- * @version Person.java, v 0.1 2021Äê08ÔÂ30ÈÕ 8:26
  */
 @Entity
 @Table(name = "user")

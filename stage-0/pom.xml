@@ -132,6 +132,11 @@
                 <artifactId>tomcat-jdbc</artifactId>
                 <version>${tomcat7.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.78</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
