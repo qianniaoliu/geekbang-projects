@@ -10,7 +10,6 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author shenlong
- * @version UserValid.java, v 0.1 2021年09月10日 4:06 下午 shenlong
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

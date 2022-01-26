@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author shenlong
- * @version PersonMBeanDemo.java, v 0.1 2021年10月31日 11:18 下午 shenlong
  */
 public class PersonMBeanDemo {
     public static void main(String[] args) throws Exception {

@@ -4,19 +4,18 @@
  */
 package com.athena.management;
 
-import com.athena.sql.Person;
-
-import javax.management.MBeanInfo;
-import javax.management.StandardMBean;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author shenlong
- * @version StandardMBeanDemo.java, v 0.1 2021年11月01日 12:57 上午 shenlong
  */
 public class StandardMBeanDemo {
+
+    public static List<Object> objectList = new ArrayList<>();
     public static void main(String[] args) throws Exception {
-        StandardMBean standardMBean = new StandardMBean(new PersonManage(new Person()), PersonManageMBean.class);
-        MBeanInfo mBeanInfo = standardMBean.getMBeanInfo();
-        System.out.println(mBeanInfo);
+        while (true){
+            objectList.add(new Object());
+        }
     }
 }

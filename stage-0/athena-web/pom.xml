@@ -32,6 +32,12 @@
         </dependency>
 
 <!--        <dependency>-->
+<!--            <groupId>com.athena</groupId>-->
+<!--            <artifactId>athena-configuration</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
 <!--            <groupId>commons-validator</groupId>-->
 <!--            <artifactId>commons-validator</artifactId>-->
 <!--        </dependency>-->
@@ -83,6 +89,11 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-dbcp</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
     </dependencies>
 
@@ -97,6 +108,11 @@
                 <version>3.0-r1756463</version>
                 <configuration>
                     <port>9091</port>
+                    <path>/</path>
+                    <enableNaming>true</enableNaming>
+                    <tomcatConfigurationFilesDirectory>
+                        src/main/webapp/META-INF/conf/
+                    </tomcatConfigurationFilesDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -110,10 +126,39 @@
                             <!-- ServletContext 路径 -->
                             <path>/</path>
                             <enableNaming>true</enableNaming>
+                            <tomcatConfigurationFilesDirectory>
+                                src/main/webapp/META-INF/conf/
+                            </tomcatConfigurationFilesDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            <!-- Tomcat 7.x 官方文档：
+                                http://tomcat.apache.org/tomcat-7.0-doc/index.html
+                                -->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.tomcat.maven</groupId>-->
+<!--                <artifactId>tomcat7-maven-plugin</artifactId>-->
+<!--                <version>2.1</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>tomcat-run</id>-->
+<!--                        <goals>-->
+<!--                            &lt;!&ndash; 最终打包成可执行的jar包 &ndash;&gt;-->
+<!--                            <goal>exec-war-only</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>package</phase>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; ServletContext 路径 &ndash;&gt;-->
+<!--                            <path>/</path>-->
+<!--                            <enableNaming>true</enableNaming>-->
+<!--                            <tomcatConfigurationFilesDirectory>-->
+<!--                                src/main/webapp/META-INF/conf/-->
+<!--                            </tomcatConfigurationFilesDirectory>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
     <pluginRepositories>

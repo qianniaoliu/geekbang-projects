@@ -10,7 +10,6 @@ import java.util.Date;
 
 /**
  * @author shenlong
- * @version PersonManage.java, v 0.1 2021年10月31日 10:57 下午 shenlong
  */
 public class PersonManage implements PersonManageMBean{
 

@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+    </annotationProcessing>
+  </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="athena-configuration" options="-proc:none -parameters" />
       <module name="athena-injection" options="-proc:none -parameters" />
+      <module name="athena-message-streaming" options="-proc:none -parameters" />
+      <module name="athena-rest-client" options="-proc:none -parameters" />
       <module name="athena-web" options="-proc:none -parameters" />
       <module name="athena-web-mvc" options="-proc:none -parameters" />
     </option>

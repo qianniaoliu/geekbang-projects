@@ -14,6 +14,9 @@
     <modules>
         <module>athena-web-mvc</module>
         <module>athena-web</module>
+        <module>athena-configuration</module>
+        <module>athena-rest-client</module>
+        <module>athena-message-streaming</module>
     </modules>
 
     <properties>
@@ -22,6 +25,7 @@
         <!-- Artifacts 依赖版本 -->
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <tomcat7.version>7.0.37</tomcat7.version>
+        <tomcat8.version>8.0.14</tomcat8.version>
         <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
         <common.lang3.version>3.12.0</common.lang3.version>
         <maven.compiler.version>3.8.1</maven.compiler.version>
@@ -36,6 +40,11 @@
         <hibernate.version>5.4.29.Final</hibernate.version>
         <hibernate.validator.version>5.4.3.Final</hibernate.validator.version>
         <glassfish-el.version>3.0.1-b08</glassfish-el.version>
+        <microprofile-config-api.version>3.0</microprofile-config-api.version>
+        <microprofile-reactive-messaging-api.version>2.0.1</microprofile-reactive-messaging-api.version>
+        <microprofile-reactive-streams-operators-api.version>2.0</microprofile-reactive-streams-operators-api.version>
+        <jackson.version>2.13.0</jackson.version>
+        <jersey-client.version>3.0.3</jersey-client.version>
     </properties>
 
     <dependencyManagement>
@@ -118,24 +127,60 @@
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-catalina-ha</artifactId>
-                <version>${tomcat7.version}</version>
+                <version>${tomcat8.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-dbcp</artifactId>
-                <version>${tomcat7.version}</version>
+                <version>${tomcat8.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>tomcat-jdbc</artifactId>
-                <version>${tomcat7.version}</version>
+                <version>${tomcat8.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.78</version>
+            </dependency>
+
+            <!-- MicroProfile Config -->
+            <dependency>
+                <groupId>org.eclipse.microprofile.config</groupId>
+                <artifactId>microprofile-config-api</artifactId>
+                <version>${microprofile-config-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
+                <artifactId>microprofile-reactive-messaging-api</artifactId>
+                <version>${microprofile-reactive-messaging-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.eclipse.microprofile.reactive-streams-operators</groupId>
+                <artifactId>microprofile-reactive-streams-operators-api</artifactId>
+                <version>${microprofile-reactive-streams-operators-api.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

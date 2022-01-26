@@ -37,8 +37,8 @@
     <!-- Define a Security Constraint on this Application -->
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Hello,World</web-resource-name>
-            <url-pattern>/hello/world</url-pattern>
+            <web-resource-name>Hello,Index</web-resource-name>
+            <url-pattern>/hello/index</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <!-- NOTE:  This role is not present in the default users file -->
