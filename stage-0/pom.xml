@@ -17,6 +17,8 @@
         <module>athena-configuration</module>
         <module>athena-rest-client</module>
         <module>athena-message-streaming</module>
+        <module>athena-cache</module>
+        <module>athena-commons</module>
     </modules>
 
     <properties>
@@ -45,6 +47,8 @@
         <microprofile-reactive-streams-operators-api.version>2.0</microprofile-reactive-streams-operators-api.version>
         <jackson.version>2.13.0</jackson.version>
         <jersey-client.version>3.0.3</jersey-client.version>
+        <junit.version>4.13.2</junit.version>
+        <javax.cache-api.version>1.1.1</javax.cache-api.version>
     </properties>
 
     <dependencyManagement>
@@ -181,6 +185,19 @@
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-client</artifactId>
                 <version>${jersey-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Java Cache API -->
+            <dependency>
+                <groupId>javax.cache</groupId>
+                <artifactId>cache-api</artifactId>
+                <version>${javax.cache-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

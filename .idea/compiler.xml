@@ -7,6 +7,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="athena-cache" options="-proc:none -parameters" />
+      <module name="athena-commons" options="-proc:none -parameters" />
       <module name="athena-configuration" options="-proc:none -parameters" />
       <module name="athena-injection" options="-proc:none -parameters" />
       <module name="athena-message-streaming" options="-proc:none -parameters" />

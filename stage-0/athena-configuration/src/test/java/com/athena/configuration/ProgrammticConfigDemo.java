@@ -2,18 +2,20 @@
  * Ant Group
  * Copyright (c) 2004-2021 All Rights Reserved.
  */
-package com.athena;
+package com.athena.configuration;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigBuilder;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
+import org.junit.Test;
 
 /**
  * @author shenlong
  */
 public class ProgrammticConfigDemo {
 
-    public static void main(String[] args) {
+    @Test
+    public void testConfig() {
         ConfigBuilder configBuilder = ConfigProviderResolver.instance().getBuilder();
         configBuilder.addDiscoveredSources();
         configBuilder.addDiscoveredConverters();
